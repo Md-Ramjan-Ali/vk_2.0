@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Company Workflow Canvas</title>
+  <meta name="description" content="Interactive Company Workflow Canvas" />
+  <link rel="stylesheet" href="../style.css?v=8" />
+  <link rel="stylesheet" href="../css/overview.css?v=8" />
+
+</head>
+
+<body
+  class="w-full h-full bg-[var(--bg-primary)] text-[var(--text-main)] overflow-hidden transition-colors duration-200">
+  <!-- Fixed Top Navbar -->
+  <div class="flex items-center justify-start pl-[24px] pr-[24px]" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        background: linear-gradient(95deg, #0b4c7d 0%, #052a49 100%);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        z-index: 9999;
+        gap: 32px;
+      " data-name="Background+HorizontalBorder">
+    <div aria-hidden="true" class="absolute border-[#c5c8d5] border-b border-solid inset-0 pointer-events-none"></div>
+    <!-- Navbar Brand: Two-line inline title -->
+    <div class="flex flex-col justify-center" style="flex-shrink: 0; line-height: 1.4;">
+      <p style="
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        color: #ffffff;
+        margin: 0 0 3px 0;
+        white-space: nowrap;
+        letter-spacing: 0.1px;
+      ">Aircraft Propulsion Development Process Landscape</p>
+      <p style="
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        color: #ffffff;
+        margin: 0;
+        white-space: nowrap;
+        letter-spacing: 0px;
+      ">Interaktive Prozesslandschaft fur die Entwicklung eines Flugzeugantriebes - von Konzept bis Delivery & Support.
+      </p>
+    </div>
+
+    <!-- Navbar Center: Dynamic Progress Bar -->
+    <div style="
+        flex-grow: 1;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      ">
+      <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+        <span style="
+          font-family: 'Inter', sans-serif;
+          font-size: 16px;
+          font-weight: 600;
+          color: #ffffff;
+          letter-spacing: 0.5px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        ">
+          <svg style="width: 17px; height: 15px; flex-shrink: 0;" viewBox="0 0 24 24" fill="currentColor"
+            preserveAspectRatio="none">
+            <path
+              d="M21,16V14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z"
+              transform="rotate(90 12 12)" />
+          </svg>
+          Aerospace Program Control Center
+        </span>
+        <span id="navbar-progress-percent" style="
+          font-family: 'Inter', sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          color: #ffffff;
+          letter-spacing: 0.5px;
+        ">0%</span>
+      </div>
+      <div style="
+        width: 100%;
+        height: 10px;
+        background: rgba(255,255,255,0.12);
+        border-radius: 99px;
+        overflow: hidden;
+      ">
+        <div id="navbar-progress-bar" style="
+          height: 100%;
+          width: 0%;
+          background: linear-gradient(90deg, #27ae60 0%, #3b82f6 100%);
+          border-radius: 99px;
+          transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 0 8px rgba(59,130,246,0.5);
+        "></div>
+      </div>
+    </div>
+
+    <!-- Spacer to reserve space for fixed right controls -->
+    <div style="width: 220px; flex-shrink: 0;"></div>
+
+
+  </div>
+
+  <!-- Fixed Left Sidebar -->
+  <div class="flex flex-col gap-[16px] items-center py-[16px]" style="
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 48px;
+        height: calc(100vh - 80px);
+        background-color: var(--sidebar-bg);
+        border-right: 1px solid var(--border-sidebar);
+        z-index: 9999;
+      " data-name="Nav">
+    <div aria-hidden="true" class="absolute border-[#c9ccda] border-r border-solid inset-0 pointer-events-none"></div>
+    <div id="left-sidebar-grid-btn"
+      class="bg-[rgba(212,215,227,0.2)] content-stretch flex items-center justify-center relative rounded-[8px] shrink-0 size-[32px] cursor-pointer"
+      data-name="Button">
+      <svg class="size-[16px] text-[#27ae60]" viewBox="0 0 24 24" fill="currentColor">
+        <!-- Row 1 -->
+        <rect x="3" y="7" width="4" height="4" rx="1" />
+        <rect x="10" y="7" width="4" height="4" rx="1" />
+        <rect x="17" y="7" width="4" height="4" rx="1" />
+        <!-- Row 2 -->
+        <rect x="3" y="13" width="4" height="4" rx="1" />
+        <rect x="10" y="13" width="4" height="4" rx="1" />
+        <rect x="17" y="13" width="4" height="4" rx="1" />
+      </svg>
+    </div>
+    <div class="flex-[1_0_0] min-h-[32px] relative" data-name="Margin">
+      <div class="flex flex-col justify-end min-h-[inherit] size-full">
+        <div
+          class="content-stretch flex flex-col items-start justify-end min-h-[inherit] pt-[808px] relative size-full">
+          <div class="content-stretch flex flex-col items-start opacity-0 relative shrink-0" data-name="Container">
+            <div class="content-stretch flex items-center justify-center relative rounded-[8px] shrink-0 size-[32px]"
+              data-name="Button">
+              <div class="content-stretch flex flex-col items-center relative shrink-0 size-[14px]"
+                data-name="Container"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="canvas-wrapper" class="w-full h-full bg-[var(--canvas-bg)]"
+    style="overflow: hidden; position: relative; z-index: 1;">
+    <div id="canvas-container" style="position: relative; overflow: visible">
+      <div id="canvas-root" style="
+            width: 1540px;
+            min-height: 1080px;
+            position: relative;
+            transform-origin: top left;
+          ">
+        <div class="bg-[var(--canvas-bg)] relative size-full" data-name="Company Workflow">
+          <!-- Aircraft Engine Engineering Dashboard Page Content -->
+          <div style="
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 120px 24px 40px 24px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            box-sizing: border-box;
+          ">
+            
+            <!-- Title Section -->
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <h1 style="
+                font-size: 32px;
+                font-weight: 800;
+                color: var(--text-main);
+                margin: 0;
+                letter-spacing: -0.025em;
+              ">
+                Aircraft Engine Engineering Dashboard
+              </h1>
+              <p style="
+                font-size: 14px;
+                color: var(--text-muted);
+                margin: 0;
+                line-height: 1.5;
+              ">
+                Interaktive Beispielseite für die Entwicklung eines Flugzeugtriebwerks – mit Loops, Modulen, KPIs und Dokumentenstruktur.
+              </p>
+            </div>
+
+            <!-- Tab Navigation Section -->
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button class="dashboard-tab active" style="
+                padding: 8px 16px;
+                font-size: 12px;
+                font-weight: 600;
+                border-radius: 6px;
+                border: none;
+                cursor: pointer;
+                background-color: #0b4c7d;
+                color: #ffffff;
+                transition: opacity 0.2s;
+              ">Design</button>
+              <button class="dashboard-tab" style="
+                padding: 8px 16px;
+                font-size: 12px;
+                font-weight: 600;
+                border-radius: 6px;
+                border: none;
+                cursor: pointer;
+                background-color: var(--bg-secondary);
+                border: 1px solid var(--border-color);
+                color: var(--text-main);
+                transition: opacity 0.2s;
+              ">Test</button>
+              <button class="dashboard-tab" style="
+                padding: 8px 16px;
+                font-size: 12px;
+                font-weight: 600;
+                border-radius: 6px;
+                border: none;
+                cursor: pointer;
+                background-color: var(--bg-secondary);
+                border: 1px solid var(--border-color);
+                color: var(--text-main);
+                transition: opacity 0.2s;
+              ">Manufacturing</button>
+            </div>
+
+            <!-- Main Dashboard Cards Grid -->
+            <div style="
+              display: grid;
+              grid-template-columns: 2fr 1fr;
+              gap: 24px;
+              width: 100%;
+            ">
+              
+              <!-- Card 1: High-Level Loop -->
+              <div class="dashboard-card" style="
+                background-color: var(--sidebar-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                padding: 24px;
+                box-shadow: 0 4px 6px -1px var(--card-shadow);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 20px;
+              ">
+                <div>
+                  <h3 style="font-size: 18px; font-weight: 700; margin: 0 0 16px 0; color: var(--text-main);">High-Level Loop</h3>
+                  
+                  <!-- Loop Flow Diagram -->
+                  <div style="
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    flex-wrap: wrap;
+                    margin-bottom: 8px;
+                  ">
+                    
+                    <!-- Requirements -->
+                    <div class="loop-step" style="
+                      background-color: var(--bg-primary);
+                      border: 1.5px solid var(--border-color);
+                      padding: 10px 18px;
+                      border-radius: 8px;
+                      font-weight: 600;
+                      font-size: 13px;
+                      color: var(--text-main);
+                    ">Requirements</div>
+                    
+                    <span style="color: var(--text-muted); font-weight: bold;">&rarr;</span>
+                    
+                    <!-- Design -->
+                    <div class="loop-step" style="
+                      background-color: var(--bg-primary);
+                      border: 1.5px solid var(--border-color);
+                      padding: 10px 18px;
+                      border-radius: 8px;
+                      font-weight: 600;
+                      font-size: 13px;
+                      color: var(--text-main);
+                    ">Design</div>
+                    
+                    <span style="color: var(--text-muted); font-weight: bold;">&rarr;</span>
+                    
+                    <!-- Build -->
+                    <div class="loop-step" style="
+                      background-color: var(--bg-primary);
+                      border: 1.5px solid var(--border-color);
+                      padding: 10px 18px;
+                      border-radius: 8px;
+                      font-weight: 600;
+                      font-size: 13px;
+                      color: var(--text-main);
+                    ">Build</div>
+                    
+                    <span style="color: var(--text-muted); font-weight: bold;">&rarr;</span>
+                    
+                    <!-- Test -->
+                    <div class="loop-step" style="
+                      background-color: var(--bg-primary);
+                      border: 1.5px solid var(--border-color);
+                      padding: 10px 18px;
+                      border-radius: 8px;
+                      font-weight: 600;
+                      font-size: 13px;
+                      color: var(--text-main);
+                    ">Test</div>
+                    
+                    <span style="color: var(--text-muted); font-weight: bold;">&rarr;</span>
+                    
+                    <!-- Certify -->
+                    <div class="loop-step" style="
+                      background-color: var(--bg-primary);
+                      border: 1.5px solid var(--border-color);
+                      padding: 10px 18px;
+                      border-radius: 8px;
+                      font-weight: 600;
+                      font-size: 13px;
+                      color: var(--text-main);
+                    ">Certify</div>
+
+                    <span style="
+                      cursor: pointer;
+                      font-size: 18px;
+                      color: var(--text-muted);
+                      display: flex;
+                      align-items: center;
+                      transition: color 0.2s;
+                      margin-left: 8px;
+                    " title="Reset/Reload Loop">↻</span>
+
+                  </div>
+                </div>
+                
+                <p style="
+                  font-size: 12px;
+                  color: var(--text-muted);
+                  margin: 0;
+                  line-height: 1.5;
+                ">
+                  Jeder Schritt erzeugt Daten, Entscheidungen und Feedback für den nächsten Entwicklungszyklus.
+                </p>
+              </div>
+
+              <!-- Card 2: Projektstatus -->
+              <div class="dashboard-card" style="
+                background-color: var(--sidebar-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                padding: 24px;
+                box-shadow: 0 4px 6px -1px var(--card-shadow);
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                justify-content: space-between;
+              ">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <h3 style="font-size: 18px; font-weight: 700; margin: 0; color: var(--text-main);">Projektstatus</h3>
+                    <span style="
+                      background-color: rgba(217, 119, 6, 0.15);
+                      color: #b45309;
+                      font-size: 10px;
+                      font-weight: 700;
+                      padding: 4px 8px;
+                      border-radius: 99px;
+                      text-transform: uppercase;
+                      letter-spacing: 0.05em;
+                    ">In Development</span>
+                  </div>
+                  
+                  <p style="font-size: 12px; color: var(--text-main); line-height: 1.5; margin: 0 0 16px 0;">
+                    <strong>Aktueller Fokus:</strong> Model-Based Engineering and process architecture setup.
+                  </p>
+                </div>
+
+                <div>
+                  <!-- Progress Bar -->
+                  <div style="width: 100%; height: 6px; background-color: var(--bg-primary); border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+                    <div style="width: 82%; height: 100%; background: linear-gradient(90deg, #0b4c7d 0%, #3b82f6 100%);"></div>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 10px; color: var(--text-muted);">Demo-Reifegrad: 82%</span>
+                    <span style="font-size: 10px; color: var(--text-muted);">Design Freeze noch offen</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Three Cards Grid -->
+            <div style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 24px;
+              width: 100%;
+            ">
+              
+              <!-- Card 3: Digital Twin -->
+              <div class="dashboard-card" style="
+                background-color: var(--sidebar-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                padding: 20px;
+                box-shadow: 0 4px 6px -1px var(--card-shadow);
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+              ">
+                <h4 style="font-size: 14px; font-weight: 700; margin: 0; color: var(--text-main);">Digital Twin</h4>
+                <p style="font-size: 11px; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                  Virtuelles Triebwerksmodell mit CAD, Simulation, Testdaten und Service-Feedback.
+                </p>
+              </div>
+
+              <!-- Card 4: Model-Based Engineering -->
+              <div class="dashboard-card" style="
+                background-color: var(--sidebar-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                padding: 20px;
+                box-shadow: 0 4px 6px -1px var(--card-shadow);
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+              ">
+                <h4 style="font-size: 14px; font-weight: 700; margin: 0; color: var(--text-main);">Model-Based Engineering</h4>
+                <p style="font-size: 11px; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                  Anforderungen, Architektur, Nachweise und Änderungen bleiben nachvollziehbar verbunden.
+                </p>
+              </div>
+
+              <!-- Card 5: Predictive Maintenance -->
+              <div class="dashboard-card" style="
+                background-color: var(--sidebar-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                padding: 20px;
+                box-shadow: 0 4px 6px -1px var(--card-shadow);
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+              ">
+                <h4 style="font-size: 14px; font-weight: 700; margin: 0; color: var(--text-main);">Predictive Maintenance</h4>
+                <p style="font-size: 11px; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                  Betriebsdaten können Wartung planbarer machen und ungeplante Ausfälle reduzieren.
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Footer Hint Info -->
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 12px; font-style: italic;">
+              Hinweis: Dies ist ein konzeptionelles Dashboard, keine Bauanleitung.
+            </div>
+
+          </div>
+</div></div></div></div></div><!-- Fixed Zoom Controls (stays viewport-relative and doesn't scale) -->
+  <div id="fixed-zoom-controls" style="
+        position: fixed;
+        top: 23px;
+        right: 24px;
+        z-index: 10005;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        pointer-events: auto;
+        transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      ">
+    <!-- Search Widget Container -->
+    <div id="search-container" class="relative">
+      <button id="search-toggle-btn" aria-label="Toggle search panel">
+        <!-- Magnifying Glass Icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+      </button>
+      <!-- Floating Dropdown Search Card -->
+      <div id="search-dropdown" class="search-dropdown hidden">
+        <div class="search-input-wrapper">
+          <input type="text" id="search-input" placeholder="Search steps..." autocomplete="off" />
+        </div>
+        <ul id="search-results" class="search-results-list"></ul>
+      </div>
+    </div>
+    <button id="theme-toggle-btn" aria-label="Toggle dark mode">
+      <!-- Sun Icon (shown in dark mode) -->
+      <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2" />
+        <path d="M12 20v2" />
+        <path d="m4.93 4.93 1.41 1.41" />
+        <path d="m17.66 17.66 1.41 1.41" />
+        <path d="M2 12h2" />
+        <path d="M20 12h2" />
+        <path d="m6.34 17.66-1.41 1.41" />
+        <path d="m19.07 4.93-1.41 1.41" />
+      </svg>
+      <!-- Moon Icon (shown in light mode) -->
+      <svg id="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+      </svg>
+    </button>
+    <div
+      class="bg-[#1b9a53] content-stretch flex h-[34px] items-center p-[4px] relative rounded-[9999px] shrink-0 select-none shadow-sm"
+      data-name="Frame">
+      <div aria-hidden="true"
+        class="absolute border border-transparent border-solid inset-0 pointer-events-none rounded-[9999px]"></div>
+      <div id="zoom-out"
+        class="content-stretch flex h-full items-center justify-center relative rounded-[9999px] shrink-0 w-[28px] cursor-pointer transition-colors hover:bg-white/20"
+        data-name="Frame">
+        <div class="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
+          <div
+            class="[word-break:break-word] flex flex-col font-sans justify-center leading-[0] not-italic relative shrink-0 text-white text-[14px] font-bold text-center whitespace-nowrap">
+            <p class="leading-[10px]">-</p>
+          </div>
+        </div>
+      </div>
+      <div class="content-stretch flex flex-col items-start px-[8px] relative shrink-0" data-name="Container">
+        <div
+          class="[word-break:break-word] flex flex-col font-[&#x27;Inter:Medium&#x27;,sans-serif] font-medium justify-center leading-[0] not-italic relative shrink-0 text-white text-[11px] w-[29.886px]">
+          <p id="zoom-text" class="leading-[16.5px]">100%</p>
+        </div>
+      </div>
+      <div id="zoom-in"
+        class="content-stretch flex h-full items-center justify-center relative rounded-[9999px] shrink-0 w-[28px] cursor-pointer transition-colors hover:bg-white/20"
+        data-name="Button">
+        <div class="content-stretch flex flex-col items-center relative shrink-0" data-name="Container">
+          <div
+            class="[word-break:break-word] flex flex-col font-sans justify-center leading-[0] relative shrink-0 text-white text-[14px] font-bold text-center w-[8.75px]">
+            <p class="leading-[10px]">+</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left Navigation Drawer Panel (Engine Loops Menu) -->
+  <div id="left-navigation-drawer"
+    class="fixed flex flex-col items-start transition-all duration-300 ease-in-out -translate-x-full" style="
+      top: 80px;
+      left: 0;
+      width: 320px;
+      height: calc(100vh - 80px);
+      background-color: #111827; /* Dark coal theme */
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 10001;
+      box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
+      padding: 24px;
+      overflow-y: auto;
+    ">
+
+    <!-- Title, Subtitle & Close Button Container -->
+    <div
+      style="width: 100%; display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+      <div>
+        <h2
+          style="font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 800; color: #ffffff; margin: 0 0 4px 0;">
+          Engine Loops</h2>
+        <p style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; color: #9ca3af; margin: 0;">
+          Aircraft Engine Development</p>
+      </div>
+      <!-- Close (X) button -->
+      <button id="left-drawer-close-btn" aria-label="Close menu" style="
+        background: transparent;
+        border: none;
+        color: #9ca3af;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.2s ease;
+        outline: none;
+      ">
+        <svg style="width: 18px; height: 18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- Search Bar -->
+    <div style="width: 100%; margin-bottom: 24px;">
+      <input type="text" class="drawer-search-input" placeholder="Suche Loop / Modul..." style="
+        width: 100%;
+        padding: 10px 14px;
+        background-color: #ffffff;
+        border: 1px solid #374151;
+        border-radius: 8px;
+        color: #1f2937;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        outline: none;
+      " />
+    </div>
+
+    <!-- Navigation List -->
+    <div style="width: 100%; display: flex; flex-direction: column; gap: 20px;">
+      
+      <!-- DASHBOARD Section -->
+      <div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; padding-left: 12px;">
+          DASHBOARD
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <a href="../index.html" id="menu-home" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home
+          </a>
+          <a href="overview.html" id="menu-overview" class="drawer-menu-item active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> Overview
+          </a>
+          <a href="gesamtprozess.html" id="menu-gesamtprozess" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M16 3h5v5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 21H3v-5"/></svg> Gesamtprozess
+          </a>
+        </div>
+      </div>
+
+      <!-- DEVELOPMENT LOOPS Section -->
+      <div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; padding-left: 12px;">
+          DEVELOPMENT LOOPS
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <a href="requirements_loop.html" id="menu-requirements-loop" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-.44-1.24l-2.78-3.5A2 2 0 0 1 15 9.26V5a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4.26a2 2 0 0 1-.78 1.24l-2.78 3.5a2 2 0 0 0-.44 1.24Z"/></svg> Requirements Loop
+          </a>
+          <a href="concept_design_loop.html" id="menu-concept-design-loop" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Concept Design Loop
+          </a>
+          <a href="detailed_design_loop.html" id="menu-detailed-design-loop" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M12 22 8 18 22 4 4 22Z"/><path d="m17 5 3 3"/></svg> Detailed Design Loop
+          </a>
+          <a href="simulation_loop.html" id="menu-simulation-loop" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M10 2v7.31L4.75 17.5a2 2 0 0 0 1.7 3h11.1a2 2 0 0 0 1.7-3L14 9.31V2ZM8.5 2h7M7 16h10"/></svg> Simulation Loop
+          </a>
+          <a href="manufacturing_loop.html" id="menu-manufacturing-loop" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M2 20h20"/><path d="M5 17V8.5L9 11v-2.5L13 11V6.5L17 9v11"/><path d="M17 17h1.5a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 18.5 5H17"/></svg> Manufacturing Loop
+          </a>
+          <a href="test_validation_loop.html" id="menu-test-validation-loop" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Test & Validation Loop
+          </a>
+          <a href="certification_loop.html" id="menu-certification-loop" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11 11 13 15 9"/></svg> Certification Loop
+          </a>
+          <a href="service_loop.html" id="menu-service-loop" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Service Loop
+          </a>
+        </div>
+      </div>
+
+      <!-- AEROSPACE DATA VIEWS Section -->
+      <div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; padding-left: 12px;">
+          AEROSPACE DATA VIEWS
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <a href="digital_thread.html" id="menu-digital-thread" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 9v12"/><path d="M21 3a9 9 0 0 0-9 9v9"/></svg> Digital Thread
+          </a>
+          <a href="airbus_inspiration.html" id="menu-airbus-inspiration" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; transform: rotate(45deg);"><path d="M21 16V8a2 2 0 0 0-2-2h-3.5L10 1l-1.5 1.5 5 5h-4L7 6 5.5 7.5 8 10H4.5L3 8.5 1.5 10 4 12l-2.5 1.5L3 15h1.5L7 13.5h4l-5 5 1.5 1.5 5.5-5H19a2 2 0 0 0 2-2z"/></svg> Airbus Inspiration
+          </a>
+          <a href="siemens_toolchain.html" id="menu-siemens-toolchain" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Siemens Toolchain
+          </a>
+          <a href="sustainability.html" id="menu-sustainability" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 9.8a7 7 0 0 1-9 8.2Z"/><path d="M9 22v-4H5"/></svg> Sustainability
+          </a>
+          <a href="safety_compliance.html" id="menu-safety-compliance" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Safety & Compliance
+          </a>
+          <a href="supply_chain.html" id="menu-supply-chain" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Supply Chain
+          </a>
+          <a href="fleet_mro_analytics.html" id="menu-fleet-mro-analytics" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Fleet & MRO Analytics
+          </a>
+        </div>
+      </div>
+
+      <!-- ENGINE MODULES Section -->
+      <div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; padding-left: 12px;">
+          ENGINE MODULES
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <a href="module_uebersicht.html" id="menu-module-uebersicht" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Engine Modules
+          </a>
+          <a href="kpis_risiken.html" id="menu-kpis-risiken" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg> KPIs & Risiken
+          </a>
+          <a href="dokumentation.html" id="menu-dokumentation" class="drawer-menu-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M15.5 2H8.62a2 2 0 0 0-2 2v12h11V4.5L15.5 2z"/><path d="M3 7.62V21a2 2 0 0 0 2 2h11"/><polyline points="15 2 15 5 18 5"/></svg> Dokumentation
+          </a>
+        </div>
+      </div>
+
+    </div>
+    </div>
+
+  <script src="../data/project_data.js"></script>
+  <script src="../script.js?v=8"></script>
+</body>
+
+</html>
