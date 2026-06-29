@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Documentation Component Styles
+   ========================================================================== */
+.docs-card {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.docs-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="dark"] .docs-card:hover {
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Row hovers for Docs table */
+.doc-row {
+    transition: background-color 0.2s ease;
+}
+
+.doc-row:hover {
+    background-color: rgba(11, 76, 125, 0.04);
+}
+
+[data-theme="dark"] .doc-row:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}

@@ -1,0 +1,45 @@
+/* ==========================================================================
+   KPIs & Risiken Component Styles
+   ========================================================================== */
+.kpi-card {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="dark"] .kpi-card:hover {
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* KPI stat boxes */
+.stat-box {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px 20px;
+    flex: 1;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.stat-box:hover {
+    transform: translateY(-2px);
+    border-color: #3b82f6;
+    box-shadow: 0 4px 6px -1px var(--card-shadow);
+}
+
+/* Row hovers for Risks table */
+.risk-row {
+    transition: background-color 0.2s ease;
+}
+
+.risk-row:hover {
+    background-color: rgba(11, 76, 125, 0.04);
+}
+
+[data-theme="dark"] .risk-row:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
