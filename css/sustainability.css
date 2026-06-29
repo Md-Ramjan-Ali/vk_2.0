@@ -1,0 +1,64 @@
+/* ==========================================================================
+   Sustainability Component Styles
+   ========================================================================== */
+.flow-card {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.flow-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="dark"] .flow-card:hover {
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.5) !important;
+}
+
+.flow-step {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.flow-step:hover {
+    transform: translateY(-2px);
+    border-color: #3b82f6 !important;
+    background-color: var(--bg-secondary) !important;
+    box-shadow: 0 4px 6px -1px var(--card-shadow);
+}
+
+.reset-icon:hover {
+    color: var(--text-main) !important;
+    transform: rotate(90deg);
+}
+
+/* Custom interactive pill tags for trade-offs */
+.trade-pill {
+    background-color: rgba(59, 130, 246, 0.08);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 99px;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trade-pill:hover {
+    transform: translateY(-1.5px);
+    background-color: #3b82f6;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] .trade-pill {
+    background-color: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] .trade-pill:hover {
+    background-color: #60a5fa;
+    color: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
+}

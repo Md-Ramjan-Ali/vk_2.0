@@ -1,0 +1,32 @@
+/* ==========================================================================
+   Concept Design Loop Component Styles
+   ========================================================================== */
+.flow-card {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.flow-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="dark"] .flow-card:hover {
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.5) !important;
+}
+
+.flow-step {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.flow-step:hover {
+    transform: translateY(-2px);
+    border-color: #3b82f6 !important;
+    background-color: var(--bg-secondary) !important;
+    box-shadow: 0 4px 6px -1px var(--card-shadow);
+}
+
+.reset-icon:hover {
+    color: var(--text-main) !important;
+    transform: rotate(90deg);
+}

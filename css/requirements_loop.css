@@ -1,0 +1,63 @@
+/* ==========================================================================
+   Requirements Loop Component Styles
+   ========================================================================== */
+.flow-card {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.flow-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="dark"] .flow-card:hover {
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.5) !important;
+}
+
+.flow-step {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.flow-step:hover {
+    transform: translateY(-2px);
+    border-color: #3b82f6 !important;
+    background-color: var(--bg-secondary) !important;
+    box-shadow: 0 4px 6px -1px var(--card-shadow);
+}
+
+.reset-icon:hover {
+    color: var(--text-main) !important;
+    transform: rotate(90deg);
+}
+
+/* Tag Pills */
+.flow-pill {
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 99px;
+    background-color: rgba(11, 76, 125, 0.06);
+    color: #0b4c7d;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+[data-theme="dark"] .flow-pill {
+    background-color: rgba(96, 165, 250, 0.1);
+    color: #93c5fd;
+}
+
+.flow-pill:hover {
+    transform: translateY(-1px);
+    background-color: #0b4c7d;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(11, 76, 125, 0.2);
+}
+
+[data-theme="dark"] .flow-pill:hover {
+    background-color: #3b82f6;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
