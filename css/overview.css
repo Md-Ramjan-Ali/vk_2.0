@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Overview Dashboard Component Styles
+   ========================================================================== */
+.dashboard-tab {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-tab:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.dashboard-card {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.15) !important;
+}
+
+[data-theme="dark"] .dashboard-card:hover {
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.6) !important;
+}
+
+.loop-step {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.loop-step:hover {
+    transform: scale(1.04);
+    border-color: #3b82f6 !important;
+    background-color: var(--bg-secondary) !important;
+    box-shadow: 0 4px 6px -1px var(--card-shadow);
+}

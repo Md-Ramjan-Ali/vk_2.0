@@ -1,0 +1,52 @@
+/* ==========================================================================
+   Digital Thread Component Styles
+   ========================================================================== */
+.flow-card {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.flow-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="dark"] .flow-card:hover {
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.5) !important;
+}
+
+.flow-step {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.flow-step:hover {
+    transform: translateY(-2px);
+    border-color: #3b82f6 !important;
+    background-color: var(--bg-secondary) !important;
+    box-shadow: 0 4px 6px -1px var(--card-shadow);
+}
+
+.reset-icon:hover {
+    color: var(--text-main) !important;
+    transform: rotate(90deg);
+}
+
+/* Traceability Matrix Grid cells */
+.matrix-cell {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.matrix-cell:hover {
+    transform: translateY(-1px);
+    border-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
